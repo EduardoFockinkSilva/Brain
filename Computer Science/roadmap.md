@@ -3,8 +3,8 @@
 ## Basic Foundations
 
 - [ ] **Programming Languages**
-  - [ ] Python
-  - [ ] Java
+  - [X] Python
+  - [-] Java
   - [ ] C++
 
 - [ ] **Basic Algorithms & Data Structures**
