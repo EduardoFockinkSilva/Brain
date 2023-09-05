@@ -16,3 +16,5 @@ https://www.tutorialspoint.com/json/json_quick_guide.htm
 http://json-schema.org
 
 https://jsoncrack.com/editor
+
+http://jsonapi.org/implementations/
