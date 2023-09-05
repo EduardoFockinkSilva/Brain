@@ -1,4 +1,4 @@
-# Windows # Windows Environment Setup Manual
+# Windows Environment Setup Manual
 
 This manual serves as a guideline to set up essential software and utilities in a Windows environment. Each software is linked to its official download page for ease of access, along with a brief technical description.
 
