@@ -73,6 +73,19 @@ $ cat ` ~/.ssh/id_ed25519.pub `
 > copie ela para a sua conta  (não cole os espaços ou quebra de linha)
 
 
+Add-WindowsCapability -Online -Name OpenSSH.Client
+
+Set-Service -Name 'ssh-agent' -StartupType 'Manual'
+
+Start-Service ssh-agent
+
+ssh-keygen -t ed25519 -C "your-email@example.com"
+
+ssh-add "$env:USERPROFILE\.ssh\id_ed25519"
+
+Get-Content "$env:USERPROFILE\.ssh\id_ed25519.pub" | Set-Clipboard
+
+
 
 # UTILIZAÇÃO  
 
