@@ -1,3 +1,5 @@
+github
+vim
 chocolatey
 wingey
 mingw
