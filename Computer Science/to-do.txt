@@ -3,3 +3,7 @@ vim
 chocolatey
 wingey
 mingw
+
+*SEGURANÇA*
+- Senhas - video Akita
+- Backup
