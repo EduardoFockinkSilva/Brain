@@ -7,3 +7,7 @@ mingw
 
 tmux
 curl
+
+*SEGURANÇA*
+- Senhas - video Akita
+- Backup
