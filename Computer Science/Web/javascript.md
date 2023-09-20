@@ -9,7 +9,7 @@ JavaScript is a high-level, interpreted programming language primarily known for
 - [Wikipedia](https://en.wikipedia.org/wiki/JavaScript)
 - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [ECMAScript Specifications](https://www.ecma-international.org/ecma-262/)
-- [Node.js](https://nodejs.org/en/docs/)
+
 
 ---
 

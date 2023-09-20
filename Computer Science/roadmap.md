@@ -18,7 +18,7 @@
   - [ ] Discrete Mathematics
 
 - [ ] **Software Engineering Principles**
-  - [ ] Version Control (Git)
+  - [x] Version Control (Git)
   - [ ] Agile, Scrum
   - [ ] Design Patterns
 
@@ -42,7 +42,7 @@
   - [ ] ACID Properties
 
 - [ ] **Web Development**
-  - [ ] HTML, CSS, JavaScript
+  - [x] HTML, CSS, JavaScript
   - [ ] Front-end Frameworks (React, Angular)
   - [ ] Back-end Frameworks (Django, Node.js)
 
