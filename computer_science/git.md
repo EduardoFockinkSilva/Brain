@@ -6,11 +6,9 @@
 
 Git is a Distributed Version Control System (DVCS) engineered for efficiency and speed, accommodating everything from small to extensive projects. Created in 2005 by Linus Torvalds, Git provides non-linear, distributed workflows. It maintains full history, ensuring cryptographic integrity via SHA-1 hashes.
 
+[Wikipedia](https://en.wikipedia.org/wiki/Git)
+
 [Official Git Website](http://git-scm.com/)
-
-
-
-
 
 ## Installation  
 ### By Terminal

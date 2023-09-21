@@ -1,13 +1,11 @@
+curl
+postman
+docker
 github
 vim
 chocolatey
-wingey
+winget
 mingw
-
-
-tmux
-curl
-postman
 
 *SEGURANÇA*
 - Senhas - video Akita
