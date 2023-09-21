@@ -1,4 +1,6 @@
-- [ ]  Docker
+- [-]  Docker
+- [ ]  github
+- [ ]  vim
 - [x]  SSH
 - [ ]  curl
 - [ ]  postman
@@ -12,8 +14,6 @@
 - [ ]  fdisk
 - [ ]  gparted
 - [ ]  tar
-- [ ]  github
-- [ ]  vim
 - [ ]  chocolatey
 - [ ]  winget
 - [ ]  mingw
