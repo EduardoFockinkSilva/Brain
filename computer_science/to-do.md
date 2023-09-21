@@ -1,19 +1,26 @@
+## Devops
 - [-]  Docker
 - [ ]  github
-- [ ]  vim
-- [x]  SSH
-- [ ]  curl
-- [ ]  postman
+- [ ]  path variaveis de ambiente
 - [x]  tmux
+- [x]  SSH
+
+## Comandos linux
+- [ ]  mv cp cd ls mkdir touch echo >>
+- [ ]  vim
+- [ ]  curl
+- [ ]  tar
+- [ ]  chmod
+- [ ]  fdisk
+- [ ]  gparted
 - [ ]  systemd
 - [ ]  systemctl
 - [ ]  top e htop
-- [ ]  chmod
-- [ ]  mv cp cd ls mkdir touch echo >>
-- [ ]  path variaveis de ambiente
-- [ ]  fdisk
-- [ ]  gparted
-- [ ]  tar
+
+## Web
+- [ ]  postman
+
+## Windows
 - [ ]  chocolatey
 - [ ]  winget
 - [ ]  mingw
