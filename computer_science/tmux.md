@@ -4,6 +4,8 @@
 
 `tmux`, an acronym for "Terminal Multiplexer," allows users to create, manage, and navigate multiple terminal sessions from a single terminal window. It facilitates background task execution, session sharing, and seamless continuity during remote administration. tmux is OS-agnostic, highly configurable, and widely used in UNIX-like environments such as Linux and macOS. It is released under the BSD license and has an active open-source community.
 
+[Official Website](https://github.com/tmux/tmux/wiki)
+
 ## Pre-Installation Configuration
 
 Before installing `tmux`, it's often advantageous to check for existing configurations. The `tmux` package manager, `tpm`, provides an extended library of plugins and configurations.
