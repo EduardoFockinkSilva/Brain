@@ -1,12 +1,23 @@
-curl
-postman
-docker
-github
-vim
-chocolatey
-winget
-mingw
+- [ ]  Docker
+- [x]  SSH
+- [ ]  curl
+- [ ]  postman
+- [x]  tmux
+- [ ]  systemd
+- [ ]  systemctl
+- [ ]  top e htop
+- [ ]  chmod
+- [ ]  mv cp cd ls mkdir touch echo >>
+- [ ]  path variaveis de ambiente
+- [ ]  fdisk
+- [ ]  gparted
+- [ ]  tar
+- [ ]  github
+- [ ]  vim
+- [ ]  chocolatey
+- [ ]  winget
+- [ ]  mingw
 
-*SEGURANÇA*
-- Senhas - video Akita
-- Backup
+## SEGURANÇA
+- [ ]  Senhas - video Akita
+- [ ]  Backup
