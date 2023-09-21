@@ -1,64 +1,75 @@
-TMUX
+# TMUX
 
-tmux stands for "terminal multiplexer," and it allows
-multiple terminal sessions to be created, accessed,
-and managed from a single screen. tmux may be detached
-from a screen and continue running in the background,
-then later reattached, facilitating long-running tasks
-on remote servers. The software is built to be OS-agnostic
-and is commonly used in UNIX-like environments, including
-Linux and macOS. The project is an open-source initiative,
-traditionally released under a BSD license.
+## Introduction
 
-Basic Configuration:
-tmux.conf: Create a .tmux.conf file in your home directory
-for user-level configurations. This is where you can
-redefine key bindings, set tmux parameters, and include
-custom scripts.
+`tmux`, an acronym for "Terminal Multiplexer," allows users to create, manage, and navigate multiple terminal sessions from a single terminal window. It facilitates background task execution, session sharing, and seamless continuity during remote administration. tmux is OS-agnostic, highly configurable, and widely used in UNIX-like environments such as Linux and macOS. It is released under the BSD license and has an active open-source community.
 
-bash
+## Pre-Installation Configuration
+
+Before installing `tmux`, it's often advantageous to check for existing configurations. The `tmux` package manager, `tpm`, provides an extended library of plugins and configurations.
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+## Basic and Advanced Configuration
+
+### tmux.conf
+
+The `.tmux.conf` file stored in your home directory is the central configuration file for `tmux`. This file allows extensive customization, from key bindings to tmux pane behaviors.
+
+```bash
 touch ~/.tmux.conf
+echo "set -g mouse on" >> ~/.tmux.conf
+```
 
-Reload Configuration: To apply new changes from .tmux.conf
-without killing the tmux server, you can bind a key to
-reload the configuration.
+### Reload Configuration
 
-bash
-bind r source-file ~/.tmux.conf
+To hot-reload your `.tmux.conf` without terminating ongoing tasks within tmux sessions, you can either bind a key to execute the reload or do it manually.
 
-Comands
+```bash
+tmux source-file ~/.tmux.conf
+```
 
-Session Management
-Create New Session: tmux new-session -s session_name
-Attach to Session: tmux attach -t session_name
-List Sessions: tmux list-sessions
-Detach from Session: Ctrl-b d
-Kill Session: tmux kill-session -t session_name
+## Commands and Key Bindings
 
-Window Management
-Create New Window: Ctrl-b c
-Navigate to Next Window: Ctrl-b n
-Navigate to Previous Window: Ctrl-b p
-List Windows: Ctrl-b l
-Rename Current Window: Ctrl-b ,
-Select Window by Index: Ctrl-b 0 (or any number corresponding to the window index)
-Kill Current Window: Ctrl-b &
+### Session Management
+- Spawn New Session: `tmux new-session -s <session_name>`
+- Re-attach to a Session: `tmux attach -t <session_name>`
+- Enumerate Sessions: `tmux list-sessions`
+- Detach Without Terminating: `Ctrl-b d`
+- Close Session: `tmux kill-session -t <session_name>`
 
-Pane Management
-Vertical Split: Ctrl-b %
-Horizontal Split: Ctrl-b "
-Switch to Next Pane: Ctrl-b o
-Switch to Previous Pane: Ctrl-b ;
-Resize Pane: Ctrl-b [arrow key] (press Ctrl-b followed by :resize-pane -D for more control)
-Toggle Pane Zoom: Ctrl-b z
-Swap Panes: Ctrl-b { or Ctrl-b }
-Kill Pane: Ctrl-b x
-Buffer and Clipboard
-Enter Copy Mode: Ctrl-b [
-Paste from Buffer: Ctrl-b ]
-List Buffers: Ctrl-b =
+### Window (Pane Group) Management
+- Instantiate New Window: `Ctrl-b c`
+- Scroll Through Next Window: `Ctrl-b n`
+- Scroll Through Previous Window: `Ctrl-b p`
+- Enumerate All Windows: `Ctrl-b l`
+- Rename the Active Window: `Ctrl-b ,`
+- Direct Window Selection: `Ctrl-b <window_index>`
+- Terminate Current Window: `Ctrl-b &`
 
-Miscellaneous
-Reload tmux.conf: Ctrl-b :source-file ~/.tmux.conf
-Show Time: Ctrl-b t
-tmux Command Prompt: Ctrl-b :
+### Pane (Sub-Window) Management
+- Vertical Partition: `Ctrl-b %`
+- Horizontal Partition: `Ctrl-b "`
+- Cycle Through Panes: `Ctrl-b o`
+- Inverse Pane Navigation: `Ctrl-b ;`
+- Custom Pane Resizing: `Ctrl-b :resize-pane -D 10` (Moves pane down by 10 cells)
+- Fullscreen Pane Toggle: `Ctrl-b z`
+- Swap Panes: `Ctrl-b {` or `Ctrl-b }`
+- Pane Termination: `Ctrl-b x`
+
+### Buffers and Clipboard
+- Activate Copy Mode: `Ctrl-b [`
+- Insert from Clipboard: `Ctrl-b ]`
+- Buffer Listing: `Ctrl-b =`
+
+### Miscellaneous
+- Reapply tmux.conf: `Ctrl-b :source-file ~/.tmux.conf`
+- Time Display: `Ctrl-b t`
+- Command-Line tmux: `Ctrl-b :`
+
+## Best Practices
+- Use tmux sessions for grouping related windows.
+- Leverage the `.tmux.conf` to create a personalized workflow.
+- Regularly update tmux and its plugins to stay in line with the latest features and security patches.
