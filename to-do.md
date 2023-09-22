@@ -1,5 +1,5 @@
 ## Devops
-- [-]  Docker
+- [ ]  Docker
 - [ ]  github
 - [ ]  path variaveis de ambiente
 - [x]  tmux
@@ -16,6 +16,7 @@
 - [ ]  systemd
 - [ ]  systemctl
 - [ ]  top e htop
+- [ ]  nano
 
 ## Web
 - [ ]  postman
