@@ -6,9 +6,10 @@
 - [x]  SSH
 
 ## Comandos linux
-- [ ]  mv cp cd ls mkdir touch echo >>
+- [ ]  mv cp cd ls mkdir touch echo >> &&
 - [ ]  apt
 - [ ]  vim
+- [ ]  xdg-open
 - [ ]  curl
 - [ ]  tar
 - [ ]  chmod
