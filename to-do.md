@@ -22,6 +22,11 @@
 
 ## Web
 - [ ]  postman
+- [ ]  React
+
+## C
+- [ ] clang and make
+- [ ] argc argv
 
 ## Windows
 - [ ]  chocolatey
