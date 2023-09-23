@@ -8,13 +8,23 @@ SSH, which stands for "Secure Shell," is a cryptographic network protocol common
 
 [Wikipedia](https://en.wikipedia.org/wiki/Secure_Shell)
 
-## Installation and Configuration
+## Installation
 
-### SSH Key Generation and Options
+```bash
+sudo apt install ssh
+```
+
+To check if the server is alredy running.
+
+```bash
+systemctl status ssh
+```
+
+## SSH Key Generation
 
 Public key authentication offers a more secure mechanism than password-based authentication. Two keys are generated: a public key, which anyone can see, and a private key, which is known only to the owner.
 
-#### SSH Key Generation Options
+### SSH Key Generation Options
 
 - **`-t` Algorithm Type**: Specifies the algorithm to use. RSA, DSA, ECDSA, or ED25519.
 - **`-b` Bits**: The number of bits in the generated key, affecting encryption strength.
