@@ -23,6 +23,7 @@
 ## Web
 - [ ]  postman
 - [ ]  React
+- [ ]  nginx
 
 ## C
 - [ ] clang and make
