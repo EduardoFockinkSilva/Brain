@@ -20,6 +20,10 @@ To check if the server is alredy running.
 systemctl status ssh
 ```
 
+```bash
+eval $(ssh-agent)
+```
+
 ## SSH Key Generation
 
 Public key authentication offers a more secure mechanism than password-based authentication. Two keys are generated: a public key, which anyone can see, and a private key, which is known only to the owner.
