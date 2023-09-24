@@ -6,7 +6,7 @@
 - [x]  SSH
 
 ## Comandos linux
-- [ ]  mv cp cd ls mkdir touch echo >> &&
+- [x]  mv cp cd ls mkdir touch echo >> &&
 - [ ]  apt
 - [ ]  vim
 - [ ]  xdg-open
