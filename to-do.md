@@ -24,6 +24,7 @@
 - [ ]  postman
 - [ ]  React
 - [ ]  nginx
+- [ ]  Ajax
 
 ## C
 - [ ] clang and make
