@@ -1,5 +1,6 @@
 ## Devops
 - [ ]  Docker
+- [ ]  VScode
 - [ ]  github
 - [ ]  path variaveis de ambiente
 - [x]  tmux
@@ -25,6 +26,7 @@
 - [ ]  React
 - [ ]  nginx
 - [ ]  Ajax
+- [ ]  RESTful uri
 
 ## C
 - [ ] clang and make
