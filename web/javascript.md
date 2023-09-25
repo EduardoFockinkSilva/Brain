@@ -47,49 +47,52 @@ Here's a walkthrough to create and run a simple JavaScript code snippet.
 1. **Navigate to the directory where you created your index.html file.**
 
 2. **Create/Open the JavaScript file in a text editor.**
-   ```bash
-   nano script.js  # or vi, vim, emacs, code, etc.
-   ```
+
+```bash
+nano script.js  # or vi, vim, emacs, code, etc.
+```
 
 3. **Paste the following JavaScript code into the text editor.**
-   ```javascript
-    document.addEventListener('DOMContentLoaded', function() {
-    // Reference to the button and div elements
-    const colorButton = document.getElementById('colorButton');
-    const submit = document.getElementById('submit');
-  
-    // Function to generate random RGB color
-    const getRandomColor = () => {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    };
-  
-    // Event listener for button click to change its background color
-    colorButton.addEventListener('click', function() {
-      const newColor = getRandomColor();
-      document.documentElement.style.setProperty('--primary-color', newColor);
-    });
-  
-    // Event listener for div hover to display alert
-    submit.addEventListener('click', function() {
-      alert('You submited!');
-    });
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+  // Reference to the button and div elements
+  const colorButton = document.getElementById('colorButton');
+  const submit = document.getElementById('submit');
+
+  // Function to generate random RGB color
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  // Event listener for button click to change its background color
+  colorButton.addEventListener('click', function() {
+    const newColor = getRandomColor();
+    document.documentElement.style.setProperty('--primary-color', newColor);
   });
 
-   ```
+  // Event listener for div hover to display alert
+  submit.addEventListener('click', function() {
+    alert('You submited!');
+  });
+});
+
+```
 
 4. **In your HTML file, make sure to link this JS file inside the head tag.**
-   ```html
-   <script src="script.js"></script>
-   ```
+
+```html
+<script src="script.js"></script>
+```
 
 5. **To view the HTML file in a browser.**
-   ```bash
-    xdg-open index.html  # Linux
-    start index.html  # Windows
-    open index.html  # macOS
-   ```
+
+```bash
+xdg-open index.html  # Linux
+start index.html  # Windows
+open index.html  # macOS
+```
