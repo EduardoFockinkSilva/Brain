@@ -7,11 +7,12 @@
 - [x]  SSH
 
 ## Comandos linux
-- [x]  mv cp cd ls mkdir touch echo >> &&
+- [x]  mv cp cd ls mkdir touch echo >> && cat less |
 - [ ]  apt
 - [ ]  vim
 - [ ]  xdg-open
 - [ ]  curl
+- [ ]  wget
 - [ ]  tar
 - [ ]  chmod
 - [ ]  fdisk
