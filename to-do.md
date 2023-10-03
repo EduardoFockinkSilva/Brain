@@ -21,6 +21,8 @@
 - [ ]  systemctl
 - [ ]  top e htop
 - [ ]  nano
+- [ ]  diff patch
+- [ ]  tar
 
 ## Web
 - [ ]  postman
