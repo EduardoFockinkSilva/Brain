@@ -7,30 +7,30 @@ Visualizando Variáveis de Ambiente:
 Comando printenv: Para visualizar todas as variáveis de ambiente, você pode usar o comando printenv sem argumentos:
 
 bash
-Copy code
 printenv
+
 Se você quiser visualizar uma variável de ambiente específica, por exemplo, HOME, use:
 
 bash
-Copy code
 printenv HOME
+
 Comando echo: Variáveis de ambiente podem ser acessadas colocando $ antes do nome da variável. Por exemplo:
 
 bash
-Copy code
 echo $HOME
+
 Configurando Variáveis de Ambiente:
 
 Temporariamente (durante a sessão atual): Você pode definir ou modificar uma variável de ambiente usando o comando export:
 
 bash
-Copy code
 export VAR_NAME=value
+
 Por exemplo, para definir a variável MY_VAR com o valor HelloWorld, você usaria:
 
 bash
-Copy code
 export MY_VAR=HelloWorld
+
 Permanentemente:
 
 Arquivo ~/.bashrc: Para adicionar ou modificar variáveis de ambiente permanentemente para um usuário específico, você pode adicionar o comando export ao arquivo ~/.bashrc do usuário.
@@ -38,18 +38,18 @@ Arquivo ~/.bashrc: Para adicionar ou modificar variáveis de ambiente permanente
 Arquivo /etc/environment: Se você quiser definir variáveis de ambiente globalmente, para todos os usuários, pode adicionar as definições ao arquivo /etc/environment. Neste arquivo, a sintaxe é ligeiramente diferente, pois o comando export não é usado. Por exemplo:
 
 makefile
-Copy code
 VAR_NAME=value
+
 Após modificar qualquer um desses arquivos, você deve executar o comando source para aplicar as mudanças:
 
 bash
-Copy code
 source ~/.bashrc
+
 ou, para /etc/environment:
 
 bash
-Copy code
 source /etc/environment
+
 É importante lembrar que variáveis de ambiente são sensíveis ao caso (case-sensitive) no Linux, ou seja, VarName e varname seriam consideradas variáveis diferentes. Além disso, o processo de definição e visualização pode variar ligeiramente dependendo do shell que você estiver usando (bash, zsh, csh, etc.).
 
 Pricnipais variaveis de ambiente
