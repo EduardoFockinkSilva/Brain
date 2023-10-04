@@ -10,10 +10,10 @@
 - [x]  mv cp cd ls mkdir touch echo >> && cat less |
 - [ ]  apt
 - [ ]  vim
-- [ ]  xdg-open
-- [ ]  curl
-- [ ]  wget
-- [ ]  tar
+- [X]  xdg-open
+- [X]  curl
+- [X]  wget
+- [X]  tar
 - [ ]  chmod
 - [ ]  fdisk
 - [ ]  gparted
@@ -22,7 +22,10 @@
 - [ ]  top e htop
 - [ ]  nano
 - [ ]  diff patch
-- [ ]  tar
+
+## Linux
+- [ ] directory tree
+- [ ] packeges, dpkg and apt
 
 ## Web
 - [ ]  postman
