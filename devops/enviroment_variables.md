@@ -51,3 +51,7 @@ bash
 Copy code
 source /etc/environment
 É importante lembrar que variáveis de ambiente são sensíveis ao caso (case-sensitive) no Linux, ou seja, VarName e varname seriam consideradas variáveis diferentes. Além disso, o processo de definição e visualização pode variar ligeiramente dependendo do shell que você estiver usando (bash, zsh, csh, etc.).
+
+Pricnipais variaveis de ambiente
+
+echo $?
