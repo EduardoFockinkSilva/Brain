@@ -44,6 +44,7 @@
 ## Ferramentas de Desenvolvimento
 - [ ] VScode - Editor de código-fonte.
 - [ ] github - Plataforma de hospedagem de código.
+- [ ] CodeSandBox
 - [X] git - Versionador de código.
 
 ## Desenvolvimento Web
