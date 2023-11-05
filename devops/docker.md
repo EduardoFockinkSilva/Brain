@@ -1,97 +1,446 @@
-# Docker: Containerization Simplified
+# Docker
 
 ## Overview
 
-Docker is a platform for developing, shipping, and running applications in lightweight, portable containers. These containers encapsulate an application and its dependencies, allowing it to run consistently across various computing environments. Docker relies on OS-level virtualization, which makes it less resource-intensive than traditional virtual machines.
+Docker is an open-source platform designed for automating the deployment, scaling, and management of applications within lightweight and stand-alone executable packages known as containers. Containers virtualize the operating system of the host, allowing an application to run in an isolated environment with its dependencies. Docker utilizes resource isolation features of the Linux kernel such as cgroups and namespace isolation to allow independent containers to run within a single Linux instance, avoiding the overhead of starting and maintaining virtual machines. It is imperative for users to peruse the official documentation for comprehensive understanding and effective utilization of Docker, along with any technology that is being assimilated into their workflow.
 
-[Wikipedia](https://en.wikipedia.org/wiki/Docker_(software))
+Here are crucial links for commencing your journey with Docker:
 
 [Official Website](https://www.docker.com/)
 
-[Documentation](https://docs.docker.com/)
+[Docker Get Started Guide](https://docs.docker.com/get-started/overview/)
+
+## Docker Architecture and Components
+
+### Docker Engine
+The Docker Engine encompasses the Docker daemon (`dockerd`), which is a persistent background process that manages the lifecycle of Docker containers. It facilitates the tasks of building, running, distributing, and orchestrating containers and interacts with other daemons for multi-node deployments. In-depth documentation is available at the [Docker Engine Documentation](https://docs.docker.com/engine/).
+
+### Docker CLI
+The Docker Command Line Interface (CLI) is the user's gateway to interact with Docker. It converts command-line inputs into API requests for the Docker daemon, enabling the creation, management, and orchestration of Docker containers, images, networks, and volumes. Documentation for the Docker CLI can be found at [Docker CLI Documentation](https://docs.docker.com/engine/reference/commandline/cli/).
+
+### Docker Compose
+Docker Compose is an orchestration tool for defining and running multi-container Docker applications. Utilizing a `YAML` configuration file, it streamlines the process of configuring application services, networks, and volumes. Compose enables the instantiation and operation of an application's services with a single command set. The comprehensive guide is provided in the [Docker Compose Documentation](https://docs.docker.com/compose/).
+
+### Docker Hub
+Docker Hub serves as a centralized registry service for container image management and dissemination. Comparable to a version control repository for Docker images, it facilitates both public and private image storage. Developers utilize Docker Hub for pushing and pulling images, providing a base for further image customization. Access Docker Hub at [Docker Hub](https://hub.docker.com/).
+
 
 ## Installation and Initial Configuration
 
-### Installing Docker Engine
 
-Docker Engine is available for multiple operating systems including Linux, macOS, and Windows. Below is an example installation on a Ubuntu-based system.
+### Installing Docker Engine and Docker Compose
 
-```
+The Docker Engine supports various Linux distributions, macOS, and Windows. The following commands illustrate the installation on Ubuntu. Refer to the [Docker Engine Installation Guide](https://docs.docker.com/engine/install/ubuntu/) for detailed instructions.
+
+```bash
 sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 ### Post-Installation Steps
 
-After installation, you may want to add your user to the `docker` group to run Docker commands without `sudo`.
+To enable a non-root user to run Docker commands, add your user to the docker group. This step enhances the security and usability of Docker.
 
-```
+```bash
+sudo groupadd docker
 sudo usermod -aG docker $USER
+newgrp docker
 ```
 
-## Docker Architecture and Components
 
-### Docker Daemon
+### Managing Docker
 
-The background service running on the host that manages building, running and distributing Docker containers.
+#### Checking Docker Status
+To assess the state of the Docker daemon and to monitor Docker-related processes, you can use the following commands:
 
-### Docker CLI
+```bash
+# Filter out Docker-related processes
+ps -ef | grep docker
 
-Command-line interface tool that allows the user to interact with the Docker daemon.
+# Find the process ID for Docker daemon
+pgrep docker
 
-### Docker Hub
+# Check the active status of the Docker service
+sudo systemctl status docker
+```
 
-A registry service for sharing container images. You can think of it as GitHub but for Docker images.
+#### Starting Docker Service
+To initiate the Docker daemon:
+
+```bash
+sudo systemctl start docker
+```
+
+#### Stopping Docker Service
+To terminate the Docker daemon:
+
+```bash
+sudo systemctl stop docker
+```
+
+#### Displaying Docker System Information
+To obtain detailed information about the Docker installation, including the number of containers and images, default configuration settings, and runtime metrics:
+
+```bash
+sudo docker info
+```
+
+#### Testing Docker Installation
+To verify that Docker has been installed correctly and is functional, you can run the hello-world image which is a minimal Docker container:
+
+```bash
+sudo docker run hello-world
+```
+
+This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits.
+
 
 ## Container Lifecycle Management
 
 ### Starting a New Container
+To deploy a new container from an image, use `docker run`:
 
-To start a new container from an image:
-
-```
-docker run IMAGE_NAME
+```bash
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
 ### Managing Containers
+Commands to list, stop, start, and remove containers:
 
-List, stop, start, and remove containers:
+```bash
+# List all containers
+docker ps -a
 
-```
-docker ps
+# Stop a specific container
 docker stop CONTAINER_ID
+
+# Start a specific container
 docker start CONTAINER_ID
+
+# Remove a specific container
 docker rm CONTAINER_ID
 ```
 
-## Images and Registries
+### Creating and Running a Container Example
 
-### Pulling Images
-
-Download an image from a registry (like Docker Hub).
-
+```bash
+sudo docker run -itd --name ubuntu-container ubuntu /bin/bash
 ```
+
+Key options explained:
+- -i (or --interactive): Keep STDIN open even if not attached.
+- -t (or --tty): Allocate a pseudo-TTY, associating a terminal with the container.
+- --name: Assign a name to the container for easier management.
+- -d (or --detach): Run the container in the background.
+- -p: Publish a container's port(s) to the host.
+- -v: Bind mount a volume.
+
+
+#### Attaching to a Container
+To attach your terminal to a running container:
+
+```bash
+# List all containers to get the CONTAINER ID
+sudo docker ps -a
+
+# Attach to the container
+sudo docker attach CONTAINER_ID
+```
+
+Note: If you created the container without -d, you're automatically attached to it.
+
+To detach from the container without stopping it, use the CTRL-p CTRL-q sequence.
+ 
+#### Starting a Stopped Container
+To start a previously stopped container:
+
+```bash
+# Start the container by its name
+sudo docker start ubuntu-container
+
+# Verify the container is running
+sudo docker ps -a
+```
+
+#### Executing Commands Inside a Container
+To execute a command inside a running container:
+
+```bash
+sudo docker exec -it ubuntu-container COMMAND
+```
+
+#### Stopping a Running Container
+To stop a running container:
+
+```bash
+sudo docker stop ubuntu-container
+# Verify the container has stopped
+sudo docker ps -a
+```
+
+
+#### Removing a Container
+To remove a container:
+
+```bash
+# Remove a stopped container by ID or name
+sudo docker rm CONTAINER_ID_OR_NAME
+
+# Forcefully remove a running container
+sudo docker rm --force CONTAINER_ID_OR_NAME
+```
+
+
+
+## Managing Images
+
+### Searching for Images
+To list all downloaded images on your local system:
+
+```bash
+sudo docker images
+```
+
+To search for images in a registry, use the docker search command followed by the image name:
+
+```bash
+sudo docker search IMAGE_NAME
+```
+
+For example, to search for official Ubuntu, MySQL, and Nginx images in Docker Hub:
+
+```bash
+sudo docker search ubuntu  
+sudo docker search mysql  
+sudo docker search nginx  
+```
+Access to shared community images is available at [Docker Hub](https://hub.docker.com/ ).
+
+### Dowloading Images
+To download an image from a registry such as Docker Hub:
+
+```bash
 docker pull IMAGE_NAME:TAG
 ```
 
-### Building Images
+For example, to pull the latest Ubuntu image:
 
-Build an image from a Dockerfile.
-
+```bash
+docker pull ubuntu:latest
 ```
+Inspecting images provides detailed information about the image layers, configuration, and other metadata:
+
+```bash
+sudo docker image inspect `IMAGE_ID`
+```
+For instance, to inspect the Ubuntu image:
+
+```bash			
+sudo docker image inspect ubuntu
+```
+
+Removing images is done using the rmi command:
+
+```bash
+docker rmi IMAGE_ID_OR_NAME
+```
+
+
+
+## Building Images
+
+To build an image from a Dockerfile:
+
+```bash
 docker build -t IMAGE_NAME:TAG PATH_TO_DOCKERFILE
 ```
 
+### Creating a Dockerfile
+
+Tip: Only one Dockerfile should be present per directory.
+
+Contents of the Dockerfile:
+
+- FROM: Must be the first command - specifies the base image from which to build.
+- RUN: Command that will be executed during the build.
+- ENV: Set environment variables.
+- CMD: Should be the last command - specifies the command to run when the container starts.
+
+Example Dockerfile for a network service:
+
+```bash
+# Use an editor to create a Dockerfile
+$ nano Dockerfile
+
+# Content of the Dockerfile
+FROM ubuntu
+LABEL maintainer="ed"
+RUN apt-get update -y && apt-get install -y net-tools iputils-ping
+RUN mkdir -p /test  
+RUN useradd appuser   
+RUN usermod -aG sudo appuser  
+USER appuser  
+```
+
+Build the Docker image with the following command, specifying the image name, tag, and location of the Dockerfile (use . for the current directory):
+```bash
+sudo docker build -t my_image_name:version -f Dockerfile .
+````
+For example:
+
+```bash
+sudo docker build -t ubuntu:2903 -f Dockerfile .
+# Check the built image
+sudo docker images
+# Run a container from the new image
+sudo docker run -it ubuntu:2903 /bin/bash
+```
+
+### Creating a New Image from a Container
+To create a new image from a container's changes:
+
+```bash
+# List all containers
+sudo docker ps -a
+# Commit changes in a container to an image
+sudo docker commit CONTAINER_ID my_new_image
+# Check the new image
+sudo docker images
+```
+
+To exit the container without stopping it, use exit or CTRL-p CTRL-q.
+
+### Pushing an Image to Docker Hub
+Before pushing an image, make sure to tag it with your Docker Hub username and log in to Docker Hub.
+docker push 
+
+```bash
+# Tag your image
+docker tag my_image:my_tag myusername/my_image:my_tag
+# Push your image
+docker push myusername/my_image:my_tag
+```
+
+### Inspecting Docker's Storage Directories
+To look at Docker's container and image storage directories:
+
+```bash
+# List the contents of the containers directory
+sudo ls /var/lib/docker/containers -l
+
+# List the contents of the image directory
+sudo ls /var/lib/docker/image -l
+```
+
+
+
 ## Docker Compose
 
-Docker Compose is a tool to define and manage multi-container Docker applications. Configuration is usually stored in a `docker-compose.yml` file.
+Docker Compose is a tool designed for defining and orchestrating multi-container Docker applications. With Compose, you use a YAML file (`docker-compose.yml`) to configure your application’s services, and then, with a single command, you create and start all the services from your configuration.
+
+### Compose File Structure
+
+The `docker-compose.yml` file is a YAML file defining services, networks, and volumes. A service definition contains configuration that is applied to each container started for that service, much like passing command-line parameters to `docker run`. Likewise, network and volume definitions are analogous to `docker network create` and `docker volume create`.
+
+Here is a simple example of a `docker-compose.yml` file:
+
+```yaml
+version: '3.8' # specifies the Docker Compose file version
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+networks:
+  mynet:
+    driver: bridge
+volumes:
+  db-data:
+```
 
 ### Basic Commands
+To build and start your application from your project directory (where the docker-compose.yml file is located):
 
-```
+```bash
 docker-compose up
+```
+
+To stop and remove containers, networks created by up:
+
+```bash
 docker-compose down
 ```
+
+To rebuild services after a change:
+
+```bash
+docker-compose up --build
+```
+
+To start services in detached mode (run containers in the background):
+
+```bash
+docker-compose up -d
+```
+
+To stop services without removing them:
+
+```bash
+docker-compose stop
+```
+
+To restart services:
+
+```bash
+docker-compose restart
+```
+
+To list containers:
+
+```bash
+docker-compose ps
+```
+
+To view output from containers:
+
+```bash
+docker-compose logs
+```
+
+To execute a command in a service:
+
+```bash
+docker-compose exec SERVICE_NAME COMMAND
+```
+
+For example, to open a bash shell in the 'web' service container:
+
+```bash
+docker-compose exec web /bin/bash
+```
+
+To run a one-off command on a service:
+
+```bash
+docker-compose run --rm SERVICE_NAME COMMAND
+```
+
+To remove stopped service containers:
+
+```bash
+docker-compose rm
+To pull all images without starting containers:
+
+```bash
+docker-compose pull
+```
+
 
 ## Networking
 
@@ -99,7 +448,7 @@ Docker has various networking options to link containers, expose ports, and even
 
 ### Basic Networking Commands
 
-```
+```bash
 docker network ls
 docker network create NETWORK_NAME
 docker network rm NETWORK_NAME
@@ -109,7 +458,7 @@ docker network rm NETWORK_NAME
 
 Docker allows mounting volumes for persistent storage and data sharing between containers.
 
-```
+```bash
 docker volume create VOLUME_NAME
 docker volume ls
 docker volume rm VOLUME_NAME
@@ -122,647 +471,4 @@ docker volume rm VOLUME_NAME
 - Use multi-stage builds for minimizing image size.
 - Use official base images whenever possible.
 - Regularly update images for security patches.
-
-
-
-
-
-
-
-
-
-# Dicas de Docker para Linux
-
-
-
-## Atividade 1 ---- INSTALAÇÃO 
-
-
-Opções:  
-
-> --> Mint 20
-
-	$ sudo apt install docker
-	$ sudo apt install docker.io 
-
-
-> --> Linux Mint 19:  
-
-	https://gist.github.com/sirkkalap/e87cd580a47b180a7d32  
-
-
-> --> Linux Mint 18:  
-
-	https://gist.github.com/andrewelkins/1adc587feb610f586f8f40b50b7efc3a#file-install-docker-on-linux-mint-18-sh  
-
-
-
-
-> --> Shell - arquivo baixado na pasta  
-
-	$ sudo sh Install-Docker-on-Linux-Mint.sh  
-
-
-> --> Oficial docker   
-
-	https://docs.docker.com/install/linux/docker-ce/ubuntu/  
-
-
-> --> Ubuntu de 64 Bits, versão 13.04:  
-
-	https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-docker-primeiros-passos-pt  
-
-
-> --> Direto do shell  
-
-	$ wget -qO- https://get.docker.com  
-
-
-
-
-### Adicionar usuário ao grupo docker para evitar sudo
-
-> sudo usermod -aG docker ${USER}
-
-
-		$ sudo usermod -a -G docker <<seu-user-name>>
-
-
-
-
-## Atividade 1.1 ---- GERENCIAMENTO 
-
-#### Status
-			$ top  
-			$ ps -fax  
-			$ ps -ef | grep docker  
-			$ pgrep docker  
-			$ sudo systemctl status docker   -->		q (quit) para sair  
-
-
-#### Start 
-
-			$ sudo systemctl start docker
-
-
-#### Stop 
-
-			$ sudo systemctl stop docker  
-			ou  
-			$ sudo /etc/init.d/docker stop  
-
-
-#### Info
-
-			$ sudo docker info
-
-
-
-## Atividade 1.2 ---- TESTE
-
-			$ sudo docker run hello-world
-
-
-
-
-
-## Atividade 2 ---- GERENCIAR IMAGENS PRONTAS  
-
-
-
-###		Exibir imagens locais   
-
-			$ sudo docker images  
-
-
-###		Procurar por imagens prontas   
-
-			sudo docker search `nome_da_imagem`
-
->			Exemplo:  
->			$ sudo docker search ubuntu  
->			$ sudo docker search mysql  
->			$ sudo docker search mongo  
-
-
->			Shared images:  
->			https://hub.docker.com/  
->			https://hub.docker.com/search/?type=image  
-
-
-
-
-
-
-###  Baixar/instalar imagens prontas
-
-		 	sudo docker pull `nome_da_imagem`
-			
->			$ sudo docker pull ubuntu
-
-
-
-###  Inspecionar imagens
-
-		 	sudo docker image inspect `IMAGE_ID`
-			
->			$ sudo docker image inspect ubuntu 
-
-
-
-###		Excluir imagem
-
-			$ docker rmi `IMAGE_ID` 
-
-
-
-
-
-
-## Atividade 3 ---- GERENCIAR CONTAINERS
- 
-
-
-###		Exibir containers ativos
-
-			$ sudo docker ps       
-
-###		Exibir todos os containers 
-
-			$ sudo docker ps -a    
-
-
-###		Criar um container  
-
-
-			$ sudo docker run ubuntu  
-			$ sudo docker ps -a  
-
-
-###		Criar um container com nome
-
-			$ sudo docker run --name ubuntupadoin ubuntu    
-			$ sudo docker ps -a  
-
-
-
-
-
-###		Criar e Executar um container 
-
-
-			$ sudo docker run -i -t ubuntu /bin/bash  
-			ou  
-			$ sudo docker run -it ubuntu /bin/bash  
-			ou  
-			$ sudo docker run -it --name ubuntupadoin2 ubuntu   /bin/bash  
-
->							opções:  
->								-i permite interagir com o container    
->								-t associa o seu terminal ao terminal do container  
->								-it é apenas uma forma reduzida de escrever -i -t  
->								--name algum-nome permite atribuir um nome ao container em execução  
->								-p 8080:80 mapeia a porta 80 do container para a porta 8080 do host  
->								-d executa o container em background  
->								-v /pasta/host:/pasta/container cria um volume '/pasta/container' dentro do container com o conteúdo da pasta '/pasta/host' do host  
-
->								--detach , -d		Detached mode: run command in the background  
->								--detach-keys		Override the key sequence for detaching a container  
->								--env , -e			API 1.25+ Set environment variables  
->								--interactive , -i	Keep STDIN open even if not attached  
->								--privileged		Give extended privileges to the command  
->								--tty , -t			Allocate a pseudo-TTY  
->								--user , -u			Username or UID (format: <name|uid>[:<group|gid>])  
-
-
-
-
-###		Sair de um container em execução
-
-			$ exit
-
-
-
-
-###		Excluir  containers
-
-			$ sudo docker rm `CONTAINER ID`  
-
-			$ sudo docker rm --force `CONTAINER ID`  
-  
-
-
-
-
-
-
-## Atividade 4 ---- TRABALHAR COM CONTAINERS - attach
-
-
-###		Criar um container ativo em backgroud
-
-			$ sudo docker run -it -d --name padoin5 ubuntu   /bin/bash  
-	
-			$ sudo docker ps -a  
-
-
-
-###		Entrar em um container ativo e em backgroud  
-
-			$ sudo docker attach CONTAINER_ID  
-
-
-### 		Sair de um container em execução  
-
-			$ exit  
-
-
-
-
-
-
-## Atividade 4.1 ---- TRABALHAR COM CONTAINERS - exec
-
-
-###		Ativar um container 
-
-			$ sudo docker ps -a  
-
-			$ sudo docker start padoin5  
-
-			$ sudo docker ps -a  
-
-
-
-### 	Executar um comando em um container ativo sem entrar no container
-
-			$ sudo docker exec -i -t padoin5 ls 
-
-
-
-
-###		Parar um container ativo
-
-			$ sudo docker stop padoin5
-
-			$ sudo docker ps -a 
-
-
-
-
-
-
-
-## Atividade 5 ---- TRABALHAR COM CONTAINERS - 
-
-
-
-  $  sudo docker run -it --name padoin44 ubuntu   /bin/bash  
-  	 exit <----- dentro do container  
-
-  $  sudo docker ps -a  
-  $  sudo docker start padoin44  
-  $  sudo docker ps -a  
-  $  sudo docker attach padoin44   
-  	 mkdir segunda		             <----- dentro do container  
-  	 mkdir terca			             <----- dentro do container  
-  	 exit                          <----- dentro do container  
- 
-  $  sudo docker start padoin44  
-  $  sudo docker attach padoin44    
-			ls 		             <----- dentro do container  - as pastas estão no container
-
-####		Sair de um container e deixá-lo ativo
-	$   CTRL + P CTRL + Q 
-
-  $  sudo docker ps -a   
-  $  sudo docker stop padoin44  
-
-
-
-
-
-
-
-
-## Atividade 6 ---- CRIAR IMAGENS 
-
-###		Criar um arquivo Dockerfile
-
->			dica: 	somente um Dockerfile por diretorio  
-
-conteúdo do arquivo:
-
->				FROM    # deve ser a primeira instrução - de qual imagem base vou criar a minha
->				RUN  		# comando que vai ser rodado na instalação
->				ENV     #
->				CMD     # deve ser a última instrução - qual comando vai ser executado qdo o container for levantado
-
-
-Exemplo Dockerfile com serviço de rede:
-
-$ nano Dockerfile  
->					FROM ubuntu
->					MAINTAINER padoin
->					RUN apt-get -y update
->					RUN apt-get -y install net-tools
->					RUN apt-get -y install iputils-ping
-
-
-
-###		Criar a imagem com o arquivo Dockerfile 
-	
->			sudo docker build -t <nome_da_minha_imagem:versao> <local a ser criado ponto "." é no local atual >
-
-			$ sudo docker build -t ubuntu:2903 -f Dockerfile .
-
-
-
-###		Exibir imagens locais  
-
-			$ sudo docker images  
-
-
-
-
-###		Executar um container a partir de uma imagem criada  
-
-			$ sudo docker run -it ubuntu:2903 /bin/bash  
-
-
-
-###		Sair de um container ativo  
-
-			$ exit  
-
-
-
-
-
-## Atividade 7 ----  UTILIZAR UM CONTAINER CRIADO
-
-
-
-
-###		Executar um container com a imagem criada
-
-			$ sudo docker run -it ubuntu:2903 /bin/bash
-
-
-			$ ifconfig   <----------------- no container 
-
-
-####		Sair de um container e deixá-lo ativo
-
-			$ CTRL + P CTRL + Q   
-
-			$ ping 172.17.0.3    <----------------- fora do container com o IP do container   
-
-			$ sudo docker ps   
-
-			$ sudo docker stop CONTAINER_ID  
-
-
-
-
-
-## Atividade 8 ---- USAR CONTAINER CRIADO
- 
-
-###		Executar um container com a imagem criada
-
-			$ sudo docker run -it ubuntu:2903 /bin/bash
-
-
-
-###		Sair do container e deixá-lo ativo
- 
-			$ CTRL + P CTRL + Q    
-
-
-
-### 	Executar um comando em um container ativo
-
-
-			$ sudo docker ps -a  
-
-			$ sudo docker exec -i -t CONTAINER_ID ls  
-		 	$ sudo docker exec CONTAINER_ID mkdir /sd2023/  
-			$ sudo docker exec -i -t CONTAINER_ID ls  
-
-			$ sudo docker exec -i -t CONTAINER_ID ifconfig  	
-			$ ping 172.17.0.3   
-			$ CTRL + C para cancelar o ping   
-
-
-
-
-###	Entrar em um container ativo e em backgroud
-
-			$ sudo docker attach CONTAINER_ID  
-
-			ls <----- para verificar se foi criado  
-
-
-###		Sair de um container ativo
-
-			$ exit
-
-
-
-
-## Atividade 9 ---- CONTAINERS com usuários
-
-
-
-#### 1 criar uma imagem com usuário
-
->	criar uma pasta com seu nome
-
-	$ mkdir padoinativ9 
-
-> 	entrar na pasta criada
-
-	$ cd padoinativ9
-
->	criar um arquivo Dockefile com o seguinte conteudo
-
-$ nano Dockerfile2  
-
-				FROM ubuntu   
-				MAINTAINER padoin  
-				RUN mkdir -p /test  
-				RUN useradd appuser   
-				RUN usermod -a -G sudo appuser  
-				USER appuser  
-
-
-> 	criar uma imagem  
-
-			$ sudo docker build -t ubuntu:5 -f Dockerfile2 .
-
-
-#### 2 criar um container com a imagem e executar com o usuário
-
-			$ sudo docker run -i -t -u appuser  ubuntu:5 /bin/bash
-
-
-
-
-
-## Atividade 10 ---- UM CONTAINER com pasta compartilhada (volumes)
-
-
- 
-> 	criar uma pasta no seu home  
-
-	$ cd ~  
-	$ mkdir meudir  
-
-
-> 	criar um container conectando a pasta no seu home (meudir) com a pasta do container (test)
-
->			dica:  
->			- diretorio_do_home:diretorio_do_container  
->			- a pasta testSD será criada dentro do container  
-
-	$ sudo docker run -v /home/padoin/meudir:/testSD -i -t ubuntu /bin/bash
-
-> para testar crie e edite arquivos no 
->	diretorio_do_home chamado `meudir` e no diretorio_do_container chamado de `testSD`
-
-#### no container
-			$ cd testSD
-			$ echo "sistemas distribuídos" > a.txt
-			$ ls
-			$ CTRL + P CTRL + Q 		
-
-#### no home
-			$ cd meudir
-			$ ls
-			$ cat a.txt
-			$ echo "usando docker com volumes" > b.txt
-
-			$ sudo docker ps -a 
- 			$ sudo docker attach `NOME DO CONTAINER`
-
-#### no container
-			$ ls
-			$ cat b.txt	
-			$ exit
-
-
-
-
-
-## Atividade 10.1 ---- DOIS CONTAINERS com pasta compartilhada (volumes)
-
-
-> 	criar uma pasta no seu home  
-
-	$ cd ~  
-	$ mkdir pastacompartilhada
-
-> 	criar dois containers conectando com a `pasta compartilhada` 
->   container 1 com nome padoin55  
->   container 2 com nome padoin66
-
-			$ sudo docker run -v /home/padoin/pastacompartilhada:/pastashared -i -t  -d --name padoin55 ubuntu /bin/bash
-
-			$ sudo docker ps
-
-			$ sudo docker run -v /home/padoin/pastacompartilhada:/pastashared -i -t  -d --name padoin66 ubuntu /bin/bash
-
-			$ sudo docker ps
-
-
->   no shell 1 trabalhar no container padoin55  
-			$ sudo docker exec -i -t padoin55 ls  
-
-			$ sudo docker attach padoin55 
-				$ cd pastashared
-				$ echo "testando 1" > a.txt
-				$ ls  
-				$ cat  a.txt
-				$ CTRL + P CTRL + Q 
-
-
->   no shell 2 trabalhar no container padoin66  
-			$ sudo docker exec -i -t padoin66 ls  
-
-			$ sudo docker attach padoin66  
-				$ cd pastashared
-				$ echo "testando 2" >> a.txt
-				$ ls  
-				$ cat  a.txt
-				$ CTRL + P CTRL + Q 
-
-
->   fora dos containers  
-			$ cd pastacompartilhada
-			$ cat a.txt
-
->   parar os containers  
-			$ sudo docker ps 
-			$ sudo docker stop padoin55
-			$ sudo docker stop padoin66
-			$ sudo docker ps 
-
-
-
-
-
-
-## Atividade 11 ---- FUNÇÕES AVANÇADAS - commit
-
-
-###		Salvando (committing) um container
-
->		criar uma nova imagem a partir do container   
-
-			$ sudo docker ps -a
-
-			$ sudo docker commit padoin55  padoin77
-
-			$ sudo docker images
-
-
-
-
-
-
-## Atividade 12 ---- FUNÇÕES AVANÇADAS - push
-
->		enviar uma imagem para o hub
-
-			$ docker push 
-
-
-
-
-
- 
-
-
-### verificar local das imagens e containers
-
-
-	$ sudo ls  /var/lib/docker/containers -l  
- 
-	$ sudo ls  /var/lib/docker/image -l  
-
-
-
-
-
-
-
-### Ref
-
-https://docs.docker.com/
-
-https://docs.docker.com/get-started/  
-
-https://docs.docker.com/engine/reference/commandline/image_ls/
-
-https://aws.amazon.com/pt/getting-started/deep-dive-containers/?e=gs2020&p=gsrc
+- 
